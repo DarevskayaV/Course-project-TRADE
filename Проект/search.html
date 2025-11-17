@@ -1,0 +1,486 @@
+<!-- 
+  ДЕКЛАРАЦИЯ HTML5
+  
+  ТЕОРИЯ: История стандартов HTML:
+  - HTML 2.0 (1995): Первая стандартизированная версия
+  - HTML 3.2 (1997): Добавлены таблицы, апплеты
+  - HTML 4.01 (1999): Стандарт на 10 лет, разделение на Strict/Transitional
+  - XHTML (2000): XML-совместимый HTML, строгий синтаксис
+  - HTML5 (2014): Современный стандарт с семантическими тегами, мультимедиа
+  
+  Эволюция DOCTYPE:
+  HTML 4: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+  XHTML: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+  HTML5: <!DOCTYPE html> - упрощенный синтаксис
+  
+  Quirks Mode vs Standards Mode:
+  - Quirks Mode: Эмуляция старых браузеров, некорректный рендеринг
+  - Standards Mode: Современный рендеринг по спецификациям W3C
+  - Almost Standards Mode: Промежуточный режим для совместимости
+-->
+<!DOCTYPE html>
+
+<!-- 
+  КОРНЕВОЙ ЭЛЕМЕНТ HTML
+  
+  ТЕОРИЯ: Атрибут lang в веб-разработке:
+  - Влияет на синтез речи (screen readers)
+  - Определяет язык для проверки орфографии
+  - Указывает направление текста (ltr/rtl)
+  - Влияет на выбор шрифтов и типографики
+  - Важен для SEO (региональное ранжирование)
+  
+  Значения атрибута lang:
+  - "ru" - русский язык
+  - "en" - английский язык  
+  - "en-US" - английский (США)
+  - "zh-CN" - китайский (упрощенный)
+  - "ar" - арабский (справа налево)
+  
+  Микроформаты и семантика:
+  - Браузеры используют lang для подсказок перевода
+  - Поисковые системы для регионального таргетинга
+  - Скринридеры для правильного произношения
+-->
+<html lang="ru">
+
+<!-- 
+  СЕКЦИЯ HEAD - МЕТАДАННЫЕ ДОКУМЕНТА
+  
+  ТЕОРИЯ: Различие между HEAD и BODY:
+  - HEAD: Метаинформация, не видимая пользователю
+  - BODY: Содержимое, отображаемое пользователю
+  
+  Элементы HEAD по категориям:
+  1. Базовые: <title>, <meta charset>, <base>
+  2. SEO: <meta name="description">, <meta name="keywords">
+  3. Viewport: <meta name="viewport">
+  4. Подключения: <link>, <style>, <script>
+  5. Социальные: <meta property="og:title"> (Open Graph)
+-->
+<head>
+  <!-- 
+    МЕТАТЕГ КОДИРОВКИ СИМВОЛОВ
+    
+    ТЕОРИЯ: История кодировок:
+    - ASCII (1963): 128 символов, только латиница
+    - ISO-8859-1: Западноевропейские языки
+    - Windows-1251: Кириллическая кодировка
+    - Unicode: Универсальный стандарт всех символов
+    - UTF-8: Переменная длина (1-4 байта), обратная совместимость с ASCII
+    
+    Проблемы с кодировками:
+    - Кракозябры: Несоответствие declared vs actual encoding
+    - Mojibake: "РџСЂРёРІРµС‚" вместо "Привет"
+    - BOM (Byte Order Mark): Невидимый симляр в начале файла
+    
+    Best Practices:
+    - Всегда указывать charset в первых 1024 байтах
+    - Использовать UTF-8 для веб-приложений
+    - Согласовывать кодировки в БД, backend и frontend
+  -->
+  <meta charset="UTF-8" />
+  
+  <!-- 
+    VIEWPORT - АДАПТИВНЫЙ ДИЗАЙН
+    
+    ТЕОРИЯ: История мобильного веба:
+    - 2007: iPhone без viewport - масштабирование desktop сайтов
+    - 2010: Responsive Web Design (Ethan Marcotte)
+    - 2015: Mobile-first подход
+    
+    Значения viewport:
+    - width: device-width | конкретное значение (px)
+    - height: device-height | конкретное значение  
+    - initial-scale: 0.1 - 10.0 (начальный зум)
+    - minimum-scale: минимальный масштаб
+    - maximum-scale: максимальный масштаб
+    - user-scalable: yes | no (доступность!)
+    
+    Mobile-first принципы:
+    - Проектирование с мобильных устройств
+    - Progressive Enhancement
+    - Touch-friendly интерфейсы
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- 
+    ЗАГОЛОВОК СТРАНИЦЫ (TITLE)
+    
+    ТЕОРИЯ: SEO и Title Tag:
+    - Длина: 50-60 символов (Google обрезает до 600px)
+    - Структура: "Ключевое слово - Бренд"
+    - Уникальность: Каждая страница должна иметь уникальный title
+    - Релевантность: Соответствие контенту страницы
+    
+    Места отображения:
+    - SERP (Search Engine Results Page)
+    - Browser Tab
+    - Social Media Shares
+    - Browser History
+    
+    Best Practices:
+    - Основное ключевое слово в начале
+    - Бренд в конце
+    - Естественное звучание
+    - Отражение содержимого страницы
+  -->
+  <title>Поиск товаров — Электронный магазин</title>
+  
+  <!-- 
+    ПОДКЛЮЧЕНИЕ CSS
+    
+    ТЕОРИЯ: Каскадные таблицы стилей (CSS):
+    - 1996: CSS Level 1 (Håkon Wium Lie)
+    - 1998: CSS Level 2 (позиционирование, медиа-типы)
+    - 2011: CSS3 (модульная структура)
+    
+    Атрибуты link:
+    - rel: relationship (stylesheet, icon, preload, preconnect)
+    - href: Hypertext Reference (URL ресурса)
+    - type: MIME type (text/css для CSS)
+    - media: media queries (screen, print, speech)
+    - crossorigin: для CORS запросов
+    
+    Методы подключения CSS:
+    1. External: <link> (рекомендуется)
+    2. Internal: <style> в head
+    3. Inline: style attribute (избегать)
+  -->
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- 
+    ДОПОЛНИТЕЛЬНЫЕ МЕТА-ТЕГИ (рекомендуемые для продакшена):
+    
+    <meta name="description" content="Поиск товаров в электронном магазине">
+    <meta name="keywords" content="товары, поиск, фильтрация, сортировка">
+    <meta name="author" content="Электронный магазин">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta property="og:title" content="Поиск товаров">
+    <meta property="og:description" content="Найдите нужные товары">
+    <meta property="og:image" content="images/og-image.jpg">
+  -->
+</head>
+
+<!-- 
+  ТЕЛО ДОКУМЕНТА (BODY)
+  
+  ТЕОРИЯ: DOM (Document Object Model):
+  - Древовидная структура HTML документа
+  - Программный интерфейс для доступа и манипуляции
+  - Стандарт W3C: DOM Level 1, 2, 3, 4
+  
+  Этапы обработки HTML браузером:
+  1. Парсинг: HTML → Tokens → DOM Tree
+  2. Стилизация: CSS → CSSOM Tree
+  3. Render Tree: DOM + CSSOM
+  4. Layout: Расчет позиций и размеров
+  5. Paint: Отрисовка пикселей
+  6. Composite: Сборка слоев
+  
+  Critical Rendering Path:
+  - Минимизация блокирующих ресурсов
+  - Оптимизация порядка загрузки
+  - Предварительная загрузка критических ресурсов
+-->
+<body>
+
+  <!-- 
+    СЕМАНТИЧЕСКИЙ ТЕГ HEADER
+    
+    ТЕОРИЯ: Семантическая разметка (HTML5):
+    - <header>: Вводная часть или навигационная группа
+    - <nav>: Блок навигационных ссылок
+    - <main>: Основное уникальное содержимое
+    - <article>: Независимый самодостаточный контент
+    - <section>: Тематическая группировка контента
+    - <aside>: Боковая панель, дополнительный контент
+    - <footer>: Нижний колонтитул
+    
+    Преимущества семантики:
+    - Доступность: Скринридеры понимают структуру
+    - SEO: Поисковые системы лучше анализируют контент
+    - Maintainability: Код легче читать и поддерживать
+    - Future-proof: Совместимость с новыми технологиями
+    
+    ARIA (Accessible Rich Internet Applications):
+    - role="banner": Эквивалент header
+    - role="navigation": Эквивалент nav
+    - role="main": Эквивалент main
+    - aria-label: Описание для скринридеров
+  -->
+  <header class="header">
+    <!-- 
+      КОНТЕЙНЕР ДЛЯ ЛОГОТИПА
+      
+      ТЕОРИЯ: БЭМ (Блок-Элемент-Модификатор):
+      - Блок: header, logo-container
+      - Элемент: header__logo, header__title
+      - Модификатор: header--fixed, logo--small
+      
+      CSS Methodologies:
+      - OOCSS: Object-Oriented CSS
+      - SMACSS: Scalable and Modular Architecture
+      - BEM: Block Element Modifier (популярен в России)
+      - ITCSS: Inverted Triangle CSS
+    -->
+    <div class="logo-container">
+      <!-- 
+        ИЗОБРАЖЕНИЕ ЛОГОТИПА
+        
+        ТЕОРИЯ: Веб-графика:
+        - Форматы: JPEG (фото), PNG (прозрачность), SVG (вектор), WebP (современный)
+        - Оптимизация: Сжатие, responsive images, lazy loading
+        - Accessibility: Alt text для скринридеров
+        - Performance: Предзагрузка критических изображений
+        
+        Атрибуты img:
+        - src: source (обязательный)
+        - alt: alternative text (обязательный для доступности)
+        - width/height: предотвращает layout shift
+        - loading: lazy (ленивая загрузка)
+        - decoding: async (асинхронный декодинг)
+      -->
+      <img src="images/logo.png" alt="Эмблема" class="logo" />
+      
+      <!-- 
+        ЗАГОЛОВОК H1
+        
+        ТЕОРИЯ: Иерархия заголовков:
+        - h1: Главный заголовок страницы (один на страницу)
+        - h2: Основные разделы
+        - h3: Подразделы
+        - h4-h6: Дальнейшее ветвление
+        
+        SEO важность:
+        - h1: Самый важный для поисковых систем
+        - Структура должна отражать логику контента
+        - Не использовать для стилизации (используйте CSS)
+      -->
+      <h1 class="site-title">Электронный магазин</h1>
+    </div>
+
+    <!-- 
+      НАВИГАЦИЯ
+      
+      ТЕОРИЯ: Навигационные паттерны:
+      - Horizontal Navigation: Для 2-7 пунктов
+      - Vertical Navigation: Для сложных структур
+      - Hamburger Menu: Для мобильных устройств
+      - Breadcrumbs: Для многоуровневых сайтов
+      - Pagination: Для больших наборов данных
+      
+      Доступность навигации:
+      - Keyboard Navigation: Tab, Shift+Tab
+      - Skip Links: Пропуск повторяющейся навигации
+      - ARIA Labels: Описание для скринридеров
+      - Focus Indicators: Визуальное выделение фокуса
+    -->
+    <nav class="nav" aria-label="Основная навигация">
+      <!-- 
+        ОТНОСИТЕЛЬНЫЕ ПУТИ
+        
+        ТЕОРИЯ: URL структура:
+        - Абсолютные: https://site.com/folder/page.html
+        - Относительные: page.html, ../parent/page.html
+        - Root-relative: /folder/page.html
+        
+        Best Practices:
+        - Использовать относительные пути для внутренних ссылок
+        - Избегать абсолютных путей для портативности
+        - Использовать root-relative для сложных структур
+      -->
+      <a href="index.html" aria-current="page">Главная</a>
+      <a href="about.html">О нас</a>
+      
+      <!-- 
+        АКТИВНАЯ ССЫЛКА
+        
+        ТЕОРИЯ: Состояния ссылок:
+        - :link: Непосещенная ссылка
+        - :visited: Посещенная ссылка  
+        - :hover: При наведении курсора
+        - :active: В момент клика
+        - :focus: При фокусе (клавиатура)
+        
+        CSS порядок: LVHA (LoVe HAte)
+        - :link
+        - :visited  
+        - :hover
+        - :active
+      -->
+      <a href="search.html" class="active" aria-current="page">Поиск</a>
+      <a href="create.html">Создать</a>
+    </nav>
+  </header>
+
+  <!-- 
+    ОСНОВНОЕ СОДЕРЖИМОЕ
+    
+    ТЕОРИЯ: Структура контента:
+    - Main Content: Уникальный контент страницы
+    - Reusable Components: Повторяющиеся блоки
+    - Content Hierarchy: Логическая вложенность
+    
+    Landmark Roles (ARIA):
+    - role="banner": Header
+    - role="navigation": Nav  
+    - role="main": Main content
+    - role="complementary": Aside
+    - role="contentinfo": Footer
+  -->
+  <main class="search-page" role="main">
+    <!-- 
+      СЕКЦИЯ ПОИСКА
+      
+      ТЕОРИЯ: Forms и User Input:
+      - Input Types: text, number, email, url, search, tel
+      - Validation: HTML5 validation, JavaScript validation
+      - Accessibility: Label association, error messages
+      - UX: Clear labels, helpful placeholders, instant feedback
+    -->
+    <section class="search-controls" aria-labelledby="search-heading">
+      <!-- 
+        ЭЛЕМЕНТЫ ФОРМЫ
+        
+        ТЕОРИЯ: Form Accessibility:
+        - label for id: Связь метки и поля
+        - fieldset + legend: Группировка полей
+        - aria-describedby: Дополнительное описание
+        - aria-invalid: Индикация ошибки
+        - aria-required: Обязательное поле
+      -->
+      <label for="categorySelect">Категория:</label>
+      
+      <!-- 
+        SELECT ЭЛЕМЕНТ
+        
+        ТЕОРИЯ: Form Controls:
+        - Select: Выпадающий список
+        - Options: Элементы списка
+        - Optgroup: Группировка опций
+        - DataList: Автодополнение
+        
+        JavaScript взаимодействие:
+        - change event: При изменении значения
+        - selectedIndex: Индекс выбранной опции
+        - value: Значение выбранной опции
+        - options: Коллекция всех опций
+      -->
+      <select id="categorySelect" aria-describedby="category-help">
+        <option value="all">Все категории</option>
+        <!-- Динамическое заполнение через JavaScript -->
+      </select>
+      
+      <label for="sortSelect">Сортировка:</label>
+      <select id="sortSelect">
+        <option value="default">Без сортировки</option>
+        <option value="priceAsc">По цене: дешевле → дороже</option>
+        <option value="priceDesc">По цене: дороже → дешевле</option>
+        <option value="alphaAsc">По названию: А → Я</option>
+        <option value="alphaDesc">По названию: Я → А</option>
+      </select>
+    </section>
+
+    <!-- 
+      ТАБЛИЦА ДАННЫХ
+      
+      ТЕОРИЯ: HTML Tables:
+      - Semantic Structure: thead, tbody, tfoot
+      - Accessibility: caption, scope, headers
+      - Styling: border-collapse, border-spacing
+      - Responsive: Horizontal scroll, stacked layout
+      
+      Table Accessibility:
+      - caption: Описание таблицы
+      - scope: row/col - область ячеек заголовка
+      - headers: Связь ячеек с заголовками
+      - aria-label: Описание для скринридеров
+    -->
+    <section class="table-section" aria-labelledby="products-heading">
+      <table id="productTable" role="grid" aria-describedby="table-description">
+        <caption class="visually-hidden">Список товаров электронного магазина</caption>
+        <thead>
+          <tr>
+            <th scope="col">Фото</th>
+            <th scope="col">Название</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Категория</th>
+          </tr>
+        </thead>
+        
+        <!-- 
+          ДИНАМИЧЕСКОЕ ЗАПОЛНЕНИЕ
+          
+          ТЕОРИЯ: JavaScript DOM Manipulation:
+          - innerHTML: Быстрое создание контента (риск XSS)
+          - createElement + appendChild: Безопасный подход
+          - DocumentFragment: Оптимизация множественных вставок
+          - Template Literals: Современный синтаксис
+          
+          Performance Considerations:
+          - Reflow/Repaint: Минимизация изменений DOM
+          - Debouncing: Оптимизация частых обновлений
+          - Virtual DOM: Подход в React/Vue
+        -->
+        <tbody>
+          <!-- JavaScript заполнит эту область -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- 
+    ФУТЕР
+    
+    ТЕОРИЯ: Footer Content:
+    - Copyright Information
+    - Contact Information  
+    - Social Media Links
+    - Secondary Navigation
+    - Legal Links (Privacy Policy, Terms of Service)
+  -->
+  <footer class="footer" role="contentinfo">
+    <p>© 2025 Электронный магазин | hello@cute-shop.ru</p>
+  </footer>
+
+  <!-- 
+    ПОДКЛЮЧЕНИЕ JAVASCRIPT
+    
+    ТЕОРИЯ: Загрузка и выполнение JavaScript:
+    - Парсинг: Чтение и анализ кода
+    - Компиляция: JIT компиляция в машинный код
+    - Выполнение: Запуск скомпилированного кода
+    
+    Атрибуты script:
+    - async: Загрузка асинхронно, выполнение сразу после загрузки
+    - defer: Загрузка асинхронно, выполнение после парсинга HTML
+    - type: module (ES6 modules)
+    - nomodule: Fallback для старых браузеров
+    
+    Performance Optimization:
+    - Минимизация блокирующих скриптов
+    - Использование async/defer
+    - Code Splitting: Разделение на chunks
+    - Tree Shaking: Удаление неиспользуемого кода
+  -->
+  
+  <!-- 
+    МОДУЛЬНАЯ СТРУКТУРА
+    
+    ТЕОРИЯ: Архитектура веб-приложений:
+    - products.js: Data Layer (модель данных)
+    - search.js: Presentation Layer (логика представления)
+    - style.css: View Layer (стилизация)
+    
+    Design Patterns:
+    - MVC: Model-View-Controller
+    - MVVM: Model-View-ViewModel  
+    - Component-Based: React/Vue компоненты
+    - Service-Oriented: Микросервисная архитектура
+  -->
+  <script src="products.js"></script>
+  <script src="search.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1006 @@
+/* 
+ * КАСКАДНЫЕ ТАБЛИЦЫ СТИЛЕЙ (CSS) - ГЛУБОКАЯ ТЕОРИЯ
+ * 
+ * История CSS:
+ * - 1994: Håkon Wium Lie предлагает CSS
+ * - 1996: CSS Level 1 (W3C Recommendation)
+ * - 1998: CSS Level 2 (позиционирование, медиа-типы)
+ * - 2005: CSS 2.1 (исправление ошибок)
+ * - 2011: CSS3 (модульная структура)
+ * 
+ * CSS Architecture:
+ * - BEM (Block Element Modifier)
+ * - OOCSS (Object-Oriented CSS)
+ * - SMACSS (Scalable and Modular Architecture)
+ * - ITCSS (Inverted Triangle CSS)
+ */
+
+/* === ОБЩИЕ НАСТРОЙКИ СТРАНИЦЫ === */
+/* 
+ * СЕЛЕКТОР body - применяет стили ко всему документу
+ * 
+ * ТЕОРИЯ: Каскадирование и специфичность:
+ * - Inheritance: Наследование свойств от родителя
+ * - Specificity: Вес селектора (0,0,0,0)
+ * - Cascade: Порядок применения стилей
+ */
+body {
+  /* 
+   * СВОЙСТВО font-family - определение шрифтовой гарнитуры
+   * 
+   * ТЕОРИЯ: Web Typography и font stacks:
+   * - Segoe UI: Системный шрифт Windows
+   * - sans-serif: Generic family (запасной вариант)
+   * - Font Loading Strategies:
+   *   • FOIT (Flash of Invisible Text)
+   *   • FOUT (Flash of Unstyled Text)
+   *   • FOFT (Flash of Faux Text)
+   */
+  font-family: 'Segoe UI', sans-serif;
+  
+  /* 
+   * СВОЙСТВО margin - внешние отступы
+   * 
+   * ТЕОРИЯ: Box Model (Блочная модель):
+   * - Content: Содержимое элемента
+   * - Padding: Внутренний отступ
+   * - Border: Граница
+   * - Margin: Внешний отступ
+   * 
+   * Box-Sizing:
+   * - content-box: width/height = content (стандарт)
+   * - border-box: width/height = content + padding + border
+   */
+  margin: 0;
+  
+  /* 
+   * СВОЙСТВО background-color - цвет фона
+   * 
+   * ТЕОРИЯ: Цветовые системы в CSS:
+   * - Hex: #RRGGBB (16-ричная система)
+   * - RGB: rgb(255, 255, 255)
+   * - HSL: hsl(0, 100%, 50%) (Hue, Saturation, Lightness)
+   * - Named Colors: white, black, pink
+   */
+  background-color: #f9f9f9;
+  
+  /* 
+   * СВОЙСТВО color - цвет текста
+   * 
+   * ТЕОРИЯ: Accessibility (доступность):
+   * - Contrast Ratio: Минимум 4.5:1 для нормального текста
+   * - Color Blindness: Учет различных видов дальтонизма
+   * - WCAG 2.1: Web Content Accessibility Guidelines
+   */
+  color: #444;
+}
+
+/* === ШАПКА САЙТА === */
+/* 
+ * КЛАСС .header - семантический блок по БЭМ методологии
+ * 
+ * ТЕОРИЯ: CSS Methodologies:
+ * - BEM: .block__element--modifier
+ * - OOCSS: Разделение структуры и оформления
+ * - SMACSS: Категории Base, Layout, Module, State, Theme
+ */
+.header {
+  /* 
+   * СВОЙСТВО display - определение типа отображения
+   * 
+   * ТЕОРИЯ: Display Property Values:
+   * - block: Блочный элемент (занимает всю ширину)
+   * - inline: Строчный элемент (только контент)
+   * - inline-block: Строчно-блочный
+   * - flex: Flexbox контейнер
+   * - grid: CSS Grid контейнер
+   * - none: Полностью скрыт
+   */
+  display: flex;
+  
+  /* 
+   * СВОЙСТВО justify-content - выравнивание по главной оси
+   * 
+   * ТЕОРИЯ: Flexbox Axis:
+   * - Main Axis: Основная ось (горизонтальная по умолчанию)
+   * - Cross Axis: Поперечная ось (вертикальная по умолчанию)
+   * 
+   * Значения justify-content:
+   * - flex-start: В начале контейнера
+   * - flex-end: В конце контейнера
+   * - center: По центру
+   * - space-between: Равные промежутки между
+   * - space-around: Равные промежутки вокруг
+   * - space-evenly: Равные промежутки везде
+   */
+  justify-content: space-between;
+  
+  /* 
+   * СВОЙСТВО align-items - выравнивание по поперечной оси
+   * 
+   * Значения align-items:
+   * - stretch: Растянуть (по умолчанию)
+   * - flex-start: В начале
+   * - flex-end: В конце
+   * - center: По центру
+   * - baseline: По базовой линии текста
+   */
+  align-items: center;
+  
+  /* 
+   * СВОЙСТВО padding - внутренние отступы
+   * 
+   * ТЕОРИЯ: Синтаксис сокращенных свойств:
+   * - padding: 15px 40px            → top/bottom: 15px, left/right: 40px
+   * - padding: 15px 40px 20px 10px  → top, right, bottom, left (clockwise)
+   * - padding-top: 15px             → отдельное свойство
+   */
+  padding: 15px 40px;
+  
+  /* Цвет фона шапки */
+  background-color: #ffc0cb;
+  
+  /* 
+   * СВОЙСТВО box-shadow - тень элемента
+   * 
+   * ТЕОРИЯ: Синтаксис box-shadow:
+   * - offset-x: Горизонтальное смещение
+   * - offset-y: Вертикальное смещение
+   * - blur-radius: Радиус размытия
+   * - spread-radius: Радиус распространения
+   * - color: Цвет тени
+   * - inset: Внутренняя тень
+   * 
+   * Multiple Shadows: Можно задавать несколько теней через запятую
+   */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Контейнер для логотипа и названия сайта */
+.logo-container {
+  /* 
+   * Flexbox для выравнивания логотипа и текста
+   */
+  display: flex;
+  align-items: center;
+  
+  /* 
+   * СВОЙСТВО gap - расстояние между flex-элементами
+   * 
+   * ТЕОРИЯ: Gap vs Margin:
+   * - gap: Только между элементами (современный подход)
+   * - margin: Можно применять к отдельным элементам
+   * - Browser Support: gap хорошо поддерживается
+   */
+  gap: 10px;
+}
+
+/* Стили для картинки логотипа */
+.logo {
+  /* 
+   * СВОЙСТВА width/height - размеры элемента
+   * 
+   * ТЕОРИЯ: Единицы измерения в CSS:
+   * - px: Пиксели (фиксированный размер)
+   * - %: Проценты (относительно родителя)
+   * - em: Относительно font-size элемента
+   * - rem: Относительно font-size корневого элемента
+   * - vw/vh: Проценты от ширины/высоты viewport
+   * - auto: Автоматический расчет браузером
+   */
+  width: 40px;
+  height: 40px;
+}
+
+/* Название сайта */
+.site-title {
+  /* 
+   * СВОЙСТВО font-size - размер шрифта
+   * 
+   * ТЕОРИЯ: Относительные единицы для типографики:
+   * - em: 1.5em = 150% от текущего размера
+   * - rem: 1.5rem = 150% от размера корневого элемента
+   * - %: 150% = 150% от текущего размера
+   * 
+   * Responsive Typography:
+   * - clamp(): min(16px, 4vw, 22px)
+   * - calc(): calc(16px + 0.5vw)
+   */
+  font-size: 1.5em;
+  color: #333;
+}
+
+/* Навигационное меню (ссылки) */
+.nav {
+  display: flex;
+  
+  /* Расстояние между ссылками меню */
+  gap: 20px;
+}
+
+/* Ссылки в меню */
+.nav a {
+  /* 
+   * СВОЙСТВО text-decoration - оформление текста
+   * 
+   * Значения:
+   * - none: Без оформления
+   * - underline: Подчеркивание
+   * - overline: Линия над текстом
+   * - line-through: Перечеркивание
+   */
+  text-decoration: none;
+  color: #333;
+  
+  /* 
+   * СВОЙСТВО font-weight - насыщенность шрифта
+   * 
+   * Значения:
+   * - normal: 400
+   * - bold: 700
+   * - 100-900: Числовые значения
+   * - lighter/bolder: Относительно родителя
+   */
+  font-weight: 500;
+}
+
+/* 
+ * ПСЕВДОКЛАСС :hover - состояние при наведении курсора
+ * 
+ * ТЕОРИЯ: CSS Pseudo-classes:
+ * - :hover: При наведении курсора
+ * - :active: В момент активации (клика)
+ * - :focus: При получении фокуса
+ * - :visited: Посещенная ссылка
+ * - :nth-child(): Выбор по порядковому номеру
+ */
+.nav a:hover {
+  /* Текст становится белым */
+  color: #fff;
+}
+
+/* === БЛОК "О НАС" НА ГЛАВНОЙ СТРАНИЦЕ === */
+.about-section {
+  display: flex;
+  
+  /* 
+   * СВОЙСТВО flex-wrap - перенос flex-элементов
+   * 
+   * Значения:
+   * - nowrap: Без переноса (по умолчанию)
+   * - wrap: Перенос на новую строку
+   * - wrap-reverse: Перенос в обратном порядке
+   */
+  flex-wrap: wrap;
+  
+  /* Выравниваем по центру */
+  justify-content: center;
+  align-items: center;
+  
+  /* Добавляем воздух вокруг блока */
+  padding: 40px;
+  
+  /* Белый фон у блока */
+  background-color: #fff;
+}
+
+/* Текстовая часть блока "О нас" */
+.about-text {
+  /* 
+   * СВОЙСТВО flex - сокращенное свойство для flex-grow, flex-shrink, flex-basis
+   * 
+   * ТЕОРИЯ: Flex Item Properties:
+   * - flex-grow: Коэффициент роста (0 = не растягивается)
+   * - flex-shrink: Коэффициент сжатия (1 = сжимается)
+   * - flex-basis: Базовый размер (auto = автоматически)
+   * 
+   * flex: 1 → flex: 1 1 0%
+   */
+  flex: 1;
+  
+  /* Отступы внутри текстового блока */
+  padding: 20px;
+  
+  /* 
+   * СВОЙСТВО min-width - минимальная ширина элемента
+   * 
+   * ТЕОРИЯ: Responsive Design Constraints:
+   * - min-width: Минимальная ширина
+   * - max-width: Максимальная ширина
+   * - min-height: Минимальная высота
+   * - max-height: Максимальная высота
+   */
+  min-width: 250px;
+}
+
+/* Часть с картинкой в блоке "О нас" */
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 250px;
+}
+
+/* Сама картинка в блоке "О нас" */
+.about-image img {
+  /* 
+   * СВОЙСТВО width - ширина в процентах от родителя
+   * 
+   * ТЕОРИЯ: Responsive Images:
+   * - %: Относительно родительского контейнера
+   * - max-width: 100% - не больше оригинального размера
+   * - height: auto - сохраняет пропорции
+   */
+  width: 80%;
+  
+  /* 
+   * СВОЙСТВО border-radius - скругление углов
+   * 
+   * ТЕОРИЯ: Border Radius Syntax:
+   * - border-radius: 20px              → все углы
+   * - border-radius: 10px 20px         → top-left/bottom-right, top-right/bottom-left
+   * - border-radius: 10px 20px 30px 40px → каждый угол отдельно
+   * - border-radius: 50%               → круг
+   */
+  border-radius: 20px;
+}
+
+/* === БЛОК С ДВУМЯ КОЛОНКАМИ === */
+.info-section {
+  display: flex;
+  flex-wrap: wrap;
+  
+  /* 
+   * СВОЙСТВО justify-content: space-around
+   * 
+   * Распределение пространства:
+   * - space-between: Пространство между элементами
+   * - space-around: Пространство вокруг элементов
+   * - space-evenly: Равное пространство везде
+   */
+  justify-content: space-around;
+  
+  /* Светло-серый фон */
+  background-color: #f3f3f3;
+  padding: 40px 20px;
+}
+
+/* Отдельная колонка с информацией */
+.info-column {
+  background-color: #fff;
+  padding: 20px;
+  margin: 10px;
+  
+  /* 
+   * FLEX: 0 1 45% - расшифровка:
+   * - flex-grow: 0    - не растягивается
+   * - flex-shrink: 1  - сжимается при необходимости
+   * - flex-basis: 45% - базовая ширина 45%
+   */
+  flex: 0 1 45%;
+  
+  /* Закругленные углы */
+  border-radius: 15px;
+  
+  /* Легкая тень вокруг */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* === КАРУСЕЛЬ С ТОВАРАМИ === */
+.carousel-section {
+  /* 
+   * СВОЙСТВО text-align - выравнивание текста
+   * 
+   * Значения:
+   * - left: По левому краю
+   * - right: По правому краю
+   * - center: По центру
+   * - justify: По ширине
+   */
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fff;
+}
+
+/* Основной контейнер карусели */
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* 
+   * СВОЙСТВО position - тип позиционирования
+   * 
+   * ТЕОРИЯ: Positioning Schemes:
+   * - static: Стандартный поток (по умолчанию)
+   * - relative: Относительное позиционирование
+   * - absolute: Абсолютное позиционирование
+   * - fixed: Фиксированное позиционирование
+   * - sticky: Липкое позиционирование
+   */
+  position: relative;
+  
+  /* 
+   * СВОЙСТВО max-width - максимальная ширина
+   * 
+   * ТЕОРИЯ: Responsive Containers:
+   * - width: 100% + max-width: 600px → адаптивный контейнер
+   * - Используется для ограничения ширины на больших экранах
+   */
+  max-width: 600px;
+  
+  /* 
+   * СВОЙСТВО margin: 0 auto - центрирование блока
+   * 
+   * ТЕОРИЯ: Centering Techniques:
+   * - margin: 0 auto: Для block элементов с заданной шириной
+   * - text-align: center: Для inline/inline-block элементов
+   * - flexbox: justify-content: center
+   * - grid: justify-items: center
+   */
+  margin: 0 auto;
+}
+
+/* Окно карусели - видимая часть */
+.carousel-window {
+  /* 
+   * СВОЙСТВО overflow - управление переполнением
+   * 
+   * Значения:
+   * - visible: Видимое переполнение (по умолчанию)
+   * - hidden: Скрытое переполнение
+   * - scroll: Всегда показывать скролл
+   * - auto: Скролл только при необходимости
+   */
+  overflow: hidden;
+  
+  /* Ширина окна - 80% от родителя */
+  width: 80%;
+}
+
+/* Дорожка со всеми карточками товаров */
+.carousel-track {
+  display: flex;
+  
+  /* 
+   * СВОЙСТВО transition - анимация изменений
+   * 
+   * ТЕОРИЯ: CSS Transitions:
+   * - transition: property duration timing-function delay
+   * - transform: Анимируется эффективно (hardware acceleration)
+   * - Timing Functions:
+   *   • ease: Медленно, быстро, медленно (по умолчанию)
+   *   • linear: Постоянная скорость
+   *   • ease-in: Медленное начало
+   *   • ease-out: Медленный конец
+   *   • cubic-bezier(): Кастомная функция
+   */
+  transition: transform 0.5s ease;
+}
+
+/* Одна карточка товара в карусели */
+.carousel-item {
+  /* 
+   * СВОЙСТВО min-width - минимальная ширина 100%
+   * Каждая карточка занимает всю ширину окна
+   */
+  min-width: 100%;
+  
+  /* 
+   * СВОЙСТВО box-sizing: border-box
+   * 
+   * ТЕОРИЯ: Box-Sizing Impact:
+   * - content-box: width = content (стандарт)
+   * - border-box: width = content + padding + border
+   * - Упрощает расчеты размеров
+   */
+  box-sizing: border-box;
+  
+  /* 
+   * СВОЙСТВО flex-shrink - запрет сжатия элемента
+   * 
+   * Значения:
+   * - 0: Не сжимается
+   * - 1: Сжимается (по умолчанию)
+   */
+  flex-shrink: 0;
+  
+  display: flex;
+  /* 
+   * СВОЙСТВО flex-direction - направление flex-контейнера
+   * 
+   * Значения:
+   * - row: Горизонтально (по умолчанию)
+   * - column: Вертикально
+   * - row-reverse: Горизонтально в обратном порядке
+   * - column-reverse: Вертикально в обратном порядке
+   */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease;
+}
+
+/* Картинка товара в карусели */
+.carousel-item img {
+  width: 200px;
+  border-radius: 15px;
+}
+
+/* Название товара */
+.product-name {
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+/* Цена товара */
+.product-price {
+  color: #ff69b4;
+  font-size: 1.2em;
+}
+
+/* Кнопки "Влево" и "Вправо" в карусели */
+.carousel-btn {
+  background-color: #ffc0cb;
+  /* 
+   * СВОЙСТВО border: none - убираем стандартную рамку
+   */
+  border: none;
+  /* Делаем круглыми */
+  border-radius: 50%;
+  padding: 10px 15px;
+  /* 
+   * СВОЙСТВО cursor - вид курсора мыши
+   * 
+   * Значения:
+   * - pointer: Рука с указательным пальцем
+   * - default: Стандартная стрелка
+   * - text: Текстовый курсор
+   * - not-allowed: Запрещающий знак
+   */
+  cursor: pointer;
+  font-size: 20px;
+  color: white;
+  transition: 0.3s;
+}
+
+/* Когда наводим на кнопку */
+.carousel-btn:hover {
+  background-color: #ff85a1;
+}
+
+/* === ПОДВАЛ САЙТА === */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+}
+
+/* ============================================================================
+ * MEDIA QUERIES - АДАПТИВНЫЙ ДИЗАЙН
+ * 
+ * ТЕОРИЯ: Responsive Web Design (RWD):
+ * - 2010: Ethan Marcotte вводит термин
+ * - Mobile First: Проектирование с мобильных устройств
+ * - Breakpoints: Точки перехода между макетами
+ * 
+ * Common Breakpoints:
+ * - Mobile: < 768px
+ * - Tablet: 768px - 1024px
+ * - Desktop: > 1024px
+ * 
+ * CSS Media Queries Syntax:
+ * - @media (max-width: 768px) { ... }
+ * - @media (min-width: 769px) and (max-width: 1024px) { ... }
+ * - @media (prefers-color-scheme: dark) { ... }
+ */
+
+/* Эти стили сработают только когда ширина экрана меньше 768px */
+@media (max-width: 768px) {
+  .header {
+    /* 
+     * Меняем направление flex-контейнера на вертикальное
+     */
+    flex-direction: column;
+    
+    /* Расстояние между элементами */
+    gap: 10px;
+  }
+
+  .carousel-track {
+    width: 100%;
+  }
+}
+
+/* === СТРАНИЦА "О НАС" === */
+.about-page {
+  background-color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Вступительный текст о команде */
+.team-intro {
+  /* 
+   * СВОЙСТВО max-width - ограничение максимальной ширины
+   * 
+   * ТЕОРИЯ: Readability and Line Length:
+   * - Оптимальная длина строки: 45-75 символов
+   * - max-width: 700px обеспечивает хорошую читаемость
+   */
+  max-width: 700px;
+  
+  /* 
+   * СВОЙСТВО margin - внешние отступы
+   * 
+   * Синтаксис: margin: top right bottom left
+   * margin: 0 auto 40px auto → 
+   *   top: 0, right: auto, bottom: 40px, left: auto
+   */
+  margin: 0 auto 40px auto;
+}
+
+.team-intro h2 {
+  color: #ff69b4;
+  margin-bottom: 10px;
+}
+
+/* Блок со всеми участниками команды */
+.team-section {
+  display: flex;
+  
+  /* Переносим на новую строку если не помещается */
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  /* 
+   * СВОЙСТВО gap - расстояние между grid/flex элементами
+   * 
+   * Преимущества gap:
+   * - Проще чем margin для сеток
+   * - Не требует :first-child/:last-child селекторов
+   * - Поддерживается во всех современных браузерах
+   */
+  gap: 30px;
+}
+
+/* Карточка одного участника команды */
+.team-member {
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  
+  /* 
+   * FLEX: 0 1 250px - адаптивная ширина карточек
+   * - Не растягивается (0)
+   * - Сжимается при необходимости (1)
+   * - Базовая ширина 250px
+   */
+  flex: 0 1 250px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  /* Плавная анимация для эффекта при наведении */
+  transition: transform 0.3s ease;
+}
+
+/* 
+ * ПСЕВДОКЛАСС :hover с transform
+ * 
+ * ТЕОРИЯ: CSS Transforms:
+ * - translateX/Y: Перемещение
+ * - rotate: Вращение
+ * - scale: Масштабирование
+ * - skew: Наклон
+ * - transform-origin: Точка преобразования
+ */
+.team-member:hover {
+  /* Поднимаем карточку на 5px вверх */
+  transform: translateY(-5px);
+}
+
+/* Фотография участника команды */
+.team-member img {
+  width: 120px;
+  height: 120px;
+  
+  /* 
+   * СВОЙСТВО object-fit - как изображение заполняет контейнер
+   * 
+   * Значения:
+   * - cover: Заполняет контейнер, сохраняя пропорции (обрезается)
+   * - contain: Вмещается полностью, сохраняя пропорции
+   * - fill: Растягивается, игнорируя пропорции
+   */
+  object-fit: cover;
+  
+  /* Делаем круглым */
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.team-member h3 {
+  margin: 5px 0;
+  color: #333;
+}
+
+/* Должность участника */
+.position {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+/* Цитата (девиз участника) */
+.team-member blockquote {
+  /* 
+   * СВОЙСТВО font-style - стиль шрифта
+   * 
+   * Значения:
+   * - normal: Обычный
+   * - italic: Курсив
+   * - oblique: Наклонный
+   */
+  font-style: italic;
+  color: #ff69b4;
+  
+  /* Розовая полоска слева */
+  border-left: 4px solid #ffc0cb;
+  padding-left: 10px;
+  margin: 10px 0 0;
+  
+  /* 
+   * СВОЙСТВО quotes - кавычки для цитат
+   * 
+   * Синтаксис: quotes: "open-quote" "close-quote"
+   * Поддерживает разные уровни вложенности
+   */
+  quotes: "«" "»";
+}
+
+/* 
+ * ПСЕВДОЭЛЕМЕНТ ::before - генерируемый контент перед элементом
+ * 
+ * ТЕОРИЯ: CSS Generated Content:
+ * - ::before: Контент перед элементом
+ * - ::after: Контент после элемента
+ * - content: Содержимое псевдоэлемента
+ * - attr(): Получение значения атрибута
+ */
+.team-member blockquote::before {
+  /* 
+   * СВОЙСТВО content - содержимое псевдоэлемента
+   * 
+   * Значения:
+   * - text: Произвольный текст
+   * - open-quote: Открывающая кавычка из quotes
+   * - close-quote: Закрывающая кавычка
+   * - attr(): Значение атрибута элемента
+   * - url(): Изображение
+   */
+  content: open-quote;
+}
+
+/* Добавляем закрывающую кавычку после цитаты */
+.team-member blockquote::after {
+  content: close-quote;
+}
+
+/* === АДАПТИВНОСТЬ ДЛЯ КОМАНДЫ НА МАЛЕНЬКИХ ЭКРАНАХ === */
+@media (max-width: 768px) {
+  .team-member {
+    /* 
+     * На маленьких экранах карточки занимают 80% ширины
+     * flex: 0 1 80% → не растягивается, сжимается, базовая ширина 80%
+     */
+    flex: 0 1 80%;
+  }
+}
+
+/* === СТРАНИЦА ПОИСКА ТОВАРОВ === */
+.search-page {
+  padding: 40px 20px;
+  background-color: #fff;
+}
+
+/* Блок с фильтрами поиска */
+.search-controls {
+  display: flex;
+  
+  /* Переносим на новую строку если не помещается */
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+.search-controls label {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Выпадающие списки фильтров */
+.search-controls select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Блок с таблицей товаров */
+.table-section {
+  /* 
+   * СВОЙСТВО overflow-x - горизонтальное переполнение
+   * 
+   * Используется для создания горизонтального скролла
+   * на маленьких экранах когда таблица не помещается
+   */
+  overflow-x: auto;
+}
+
+/* Таблица с товарами */
+#productTable {
+  /* Растягиваем на всю ширину */
+  width: 100%;
+  
+  /* 
+   * СВОЙСТВО border-collapse - объединение границ ячеек
+   * 
+   * Значения:
+   * - separate: Раздельные границы (по умолчанию)
+   * - collapse: Объединенные границы
+   */
+  border-collapse: collapse;
+  text-align: center;
+}
+
+/* Ячейки таблицы (и заголовки и данные) */
+#productTable th, #productTable td {
+  /* Граница вокруг каждой ячейки */
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+/* Заголовки столбцов таблицы */
+#productTable th {
+  background-color: #ffc0cb;
+  color: #333;
+}
+
+/* 
+ * ПСЕВДОКЛАСС :nth-child(even) - четные строки
+ * 
+ * ТЕОРИЯ: Structural Pseudo-classes:
+ * - :nth-child(n): Элементы по порядковому номеру
+ * - :nth-child(odd): Нечетные элементы
+ * - :nth-child(even): Четные элементы
+ * - :nth-child(3n): Каждый третий элемент
+ * - :first-child: Первый элемент
+ * - :last-child: Последний элемент
+ */
+#productTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Картинки товаров в таблице */
+#productTable img {
+  width: 80px;
+  border-radius: 10px;
+}
+
+/* === СТРАНИЦА СОЗДАНИЯ НОВОГО ТОВАРА === */
+.create-page {
+  padding: 40px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+/* Блок с формой */
+.form-section {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.form-section h2 {
+  color: #ff69b4;
+  margin-bottom: 20px;
+}
+
+/* Сама форма */
+.form-section form {
+  display: flex;
+  
+  /* Располагаем поля формы вертикально */
+  flex-direction: column;
+  
+  /* Расстояние между полями */
+  gap: 15px;
+}
+
+.form-section label {
+  /* Выравниваем текст меток по левому краю */
+  text-align: left;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Поля ввода и выпадающие списки */
+.form-section input,
+.form-section select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+}
+
+/* 
+ * ПСЕВДОКЛАСС :invalid - невалидное значение
+ * 
+ * ТЕОРИЯ: Form Validation Pseudo-classes:
+ * - :valid: Валидное значение
+ * - :invalid: Невалидное значение
+ * - :required: Обязательное поле
+ * - :optional: Необязательное поле
+ * - :in-range/out-of-range: Для числовых полей
+ */
+.form-section input:invalid,
+.form-section select:invalid {
+  /* Рамка становится розовой */
+  border-color: #ff69b4;
+}
+
+/* Кнопка отправки формы */
+.form-section button {
+  padding: 12px;
+  background-color: #ffc0cb;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Когда наводим на кнопку */
+.form-section button:hover {
+  background-color: #ff85a1;
+}
+
+/* Сообщение после отправки формы */
+#formMessage {
+  margin-top: 15px;
+  font-weight: 500;
+  color: #ff69b4;
+}
+
+/* 
+ * ДОПОЛНИТЕЛЬНАЯ ТЕОРИЯ: CSS ARCHITECTURE
+ * 
+ * 1. SPECIFICITY (СПЕЦИФИЧНОСТЬ) - вес селектора:
+ *    - Inline styles: 1,0,0,0
+ *    - ID: 0,1,0,0
+ *    - Class/pseudo-class: 0,0,1,0
+ *    - Element: 0,0,0,1
+ * 
+ * 2. CASCADE (КАСКАД) - порядок применения:
+ *    - Importance: !important
+ *    - Origin: Author > User > Browser
+ *    - Specificity: Более специфичные селекторы
+ *    - Order: Последние правила в коде
+ * 
+ * 3. INHERITANCE (НАСЛЕДОВАНИЕ):
+ *    - Наследуемые: font, color, line-height, text-align
+ *    - Ненаследуемые: margin, padding, border, background
+ *    - inherit: Принудительное наследование
+ * 
+ * 4. PERFORMANCE (ПРОИЗВОДИТЕЛЬНОСТЬ):
+ *    - Efficient Selectors: Избегать сложных селекторов
+ *    - Reduce Reflows: Минимизировать изменения геометрии
+ *    - Hardware
